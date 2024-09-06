@@ -9,7 +9,7 @@
 
 # Particle Connect, Account Abstraction SDK, Next.js, & ethers V6 on the 5ire Chain
 
-⚡️ Basic demo application using `@particle-network/connectkit` and `@particle-network/aa` to initiate social login and send transactions via an account abstraction smart account on the [5ire Chain](https://www.5ire.org/home)
+⚡️ Basic demo application using `@particle-network/connectkit` and `@particle-network/aa` to initiate social login and send transactions via an account abstraction smart account on the [5ire Chain](https://www.5ire.org/home).
 
 > Note that Account Abstraction is included wihint the new `connectkit` package. `@particle-network/aa` is required when using an EIP 1193 provider like ehter.js.
 > This demo showcases both options.

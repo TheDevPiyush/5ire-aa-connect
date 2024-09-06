@@ -38,15 +38,15 @@ const links = [
     description: "The L1 unifying all chains through Universal Accounts.",
   },
   {
-    href: "https://docs.cyber.co/",
-    title: "Cyber Documentation →",
+    href: "https://docs.5ire.org/",
+    title: "5ire Documentation →",
     description:
       "Cyber is the first restaked Ethereum Layer 2 designed for social and optimized for mass adoption.",
   },
   {
-    href: "https://docs.cyber.co/build-on-cyber/faucets",
-    title: "Cyber Testnet Faucet →",
-    description: "Claim testnet ETH daily.",
+    href: "https://testnet.5irescan.io/faucet",
+    title: "5ire Testnet Faucet →",
+    description: "Claim testnet 5ire daily.",
   },
 ];
 

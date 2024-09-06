@@ -5,6 +5,11 @@ import React from "react";
 import { ConnectKitProvider, createConfig } from "@particle-network/connectkit";
 import { authWalletConnectors } from "@particle-network/connectkit/auth";
 import type { Chain } from "@particle-network/connectkit/chains";
+import {
+  defineChain,
+  thunderTestnet,
+} from "@particle-network/connectkit/chains";
+
 // embedded wallet start
 import { EntryPosition, wallet } from "@particle-network/connectkit/wallet";
 // embedded wallet end
@@ -12,7 +17,7 @@ import { EntryPosition, wallet } from "@particle-network/connectkit/wallet";
 import { aa } from "@particle-network/connectkit/aa";
 // aa end
 // evm start
-import { cyberTestnet, cyber } from "@particle-network/connectkit/chains";
+
 import { evmWalletConnectors } from "@particle-network/connectkit/evm";
 // evm end
 
@@ -26,24 +31,71 @@ if (!projectId || !clientKey || !appId) {
   throw new Error("Please configure the Particle project in .env first!");
 }
 
-const supportChains: Chain[] = [];
-// evm start
-supportChains.push(cyberTestnet, cyber);
-// evm end
+// Define Custom Chains
+const fireMainnet = defineChain({
+  id: 995,
+  name: "5ire Mainnet",
+  nativeCurrency: {
+    decimals: 18,
+    name: "5ire",
+    symbol: "5ire",
+  },
+  rpcUrls: {
+    default: {
+      http: ["https://rpc.5ire.network"],
+    },
+  },
+  blockExplorers: {
+    default: {
+      name: "5ireChain Explorer",
+      url: "https://testnet.5irescan.io/dashboard",
+    },
+  },
+  testnet: false,
+});
+
+const fireTestnet = defineChain({
+  id: 997,
+  name: "5ire Testnet",
+  nativeCurrency: {
+    decimals: 18,
+    name: "5ire",
+    symbol: "5ire",
+  },
+  rpcUrls: {
+    default: {
+      http: ["https://rpc.testnet.5ire.network"],
+    },
+  },
+  blockExplorers: {
+    default: {
+      name: "5ireChain Explorer",
+      url: "https://testnet.5irescan.io/dashboard",
+    },
+  },
+  testnet: false,
+});
 
 const config = createConfig({
   projectId,
   clientKey,
   appId,
   appearance: {
-    recommendedWallets: [
-      { walletId: "metaMask", label: "Recommended" },
-      { walletId: "coinbaseWallet", label: "Popular" },
-    ],
+    recommendedWallets: [{ walletId: "coinbaseWallet", label: "Popular" }],
     language: "en-US",
   },
   walletConnectors: [
-    authWalletConnectors(),
+    authWalletConnectors({
+      authTypes: [
+        "github",
+        "google",
+        "apple",
+        "twitter",
+        "discord",
+        "twitch",
+        "linkedin",
+      ],
+    }),
     // evm start
     evmWalletConnectors({
       // TODO: replace it with your app metadata.
@@ -57,6 +109,7 @@ const config = createConfig({
         url: typeof window !== "undefined" ? window.location.origin : "",
       },
       walletConnectProjectId: walletConnectProjectId,
+      multiInjectedProviderDiscovery: true,
     }),
     // evm end
   ],
@@ -70,12 +123,12 @@ const config = createConfig({
 
     // aa config start
     aa({
-      name: "CYBERCONNECT",
-      version: "1.0.0",
+      name: "SIMPLE",
+      version: "2.0.0",
     }),
     // aa config end
   ],
-  chains: supportChains as unknown as readonly [Chain, ...Chain[]],
+  chains: [fireMainnet, fireTestnet],
 });
 
 // Wrap your application with this component.

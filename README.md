@@ -7,9 +7,9 @@
   </h3>
 </div>
 
-# Particle Connect, Account Abstraction SDK, Next.js, & ethers V6 on the Cyber Chain
+# Particle Connect, Account Abstraction SDK, Next.js, & ethers V6 on the 5ire Chain
 
-⚡️ Basic demo application using `@particle-network/connectkit` and `@particle-network/aa` to initiate social login and send transactions via an account abstraction smart account on the [Cyber Chain](https://docs.cyber.co/)
+⚡️ Basic demo application using `@particle-network/connectkit` and `@particle-network/aa` to initiate social login and send transactions via an account abstraction smart account on the [5ire Chain](https://www.5ire.org/home)
 
 > Note that Account Abstraction is included wihint the new `connectkit` package. `@particle-network/aa` is required when using an EIP 1193 provider like ehter.js.
 > This demo showcases both options.
@@ -28,8 +28,6 @@ yarn create @particle-network/connectkit
 
 Follow the instructions:
 
-> **Note:** This implementation demonstrates Passkey Authentication. You must use a Biconomy or Coinbase smart account. For a complete list of smart accounts, refer to the [AA SDK](https://developers.particle.network/api-reference/aa/sdks/desktop/web#initialization) page.
-
 ```sh
 🤩 Welcome to Particle Network!
 
@@ -37,9 +35,11 @@ Follow the instructions:
 
 ✔ What is the template of your project? › create-next-app
 ✔ Which chains does your app support?​ › EVM
-✔ Which ERC-4337 Contract does your app support?​ › CYBERCONNECT-1.0.0
+✔ Which ERC-4337 Contract does your app support?​ › SIMPLE-2.0.0
 ✔ Does it support an embedded wallet?​ … yes
 ```
+
+> Note that only the `SIMPLE` smart account is available on the **5ire** chain.
 
 Plus:
 
@@ -62,9 +62,9 @@ Particle Network natively supports and facilitates the end-to-end utilization of
 
 👉 Learn more about the [Particle AA SDK](https://developers.particle.network/docs/aa-web-quickstart).
 
-## What is Cyber L2
+## What is 5ire
 
-[Cyber L2](https://docs.cyber.co/) is the first Ethereum Layer 2 designed for social applications and optimized for mass adoption, offering native account abstraction, seedless wallets, and a decentralized social graph protocol. With features like high scalability, decentralized storage, and Ethereum staking rewards, Cyber L2 provides an efficient gateway for web3 users and developers.
+[5ire](https://www.5ire.org/home) is a layer-1 blockchain focused on sustainability, offering EVM compatibility and a for-benefit ecosystem built around the UN Sustainable Development Goals. 
 
 ***
 
@@ -74,7 +74,7 @@ Particle Network natively supports and facilitates the end-to-end utilization of
 
 ### Clone this repository
 ```
-git clone https://github.com/Particle-Network/cyber-aa-connect
+git clone https://github.com/Particle-Network/5ire-aa-connect
 ```
 
 ### Install dependencies
@@ -139,8 +139,8 @@ You can configure the smart account using the `aa` plugin located in `src/compon
 plugins: [
   // Smart Account (AA) configuration
   aa({
-    name: "CYBERCONNECT",
-    version: "1.0.0",
+    name: "SIMPLE",
+    version: "2.0.0",
   }),
 ],
 ```

@@ -41,20 +41,20 @@ export default function Home() {
   const connectionStatus = isConnecting
     ? "Connecting..."
     : isConnected
-    ? "Connected"
-    : isDisconnected
-    ? "Disconnected"
-    : "Unknown";
+      ? "Connected"
+      : isDisconnected
+        ? "Disconnected"
+        : "Unknown";
 
   // Init custom provider with gasless transaction mode
   const customProvider = smartAccount
     ? new ethers.BrowserProvider(
-        new AAWrapProvider(
-          smartAccount,
-          SendTransactionMode.Gasless
-        ) as Eip1193Provider,
-        "any"
-      )
+      new AAWrapProvider(
+        smartAccount,
+        SendTransactionMode.Gasless
+      ) as Eip1193Provider,
+      "any"
+    )
     : null;
 
   /**
@@ -125,15 +125,16 @@ export default function Home() {
 
       // Fetch feequotes and use verifyingPaymasterGasless for a gasless transaction
       const feeQuotesResult = await smartAccount?.getFeeQuotes(tx);
-      const { userOp, userOpHash } =
-        feeQuotesResult?.verifyingPaymasterGasless || {};
+      console.log("Fee quotes result:", feeQuotesResult);
+
+      const { userOp, userOpHash } = feeQuotesResult?.verifyingPaymasterGasless || {};
+      console.log("User operation:", userOp);
+      console.log("User operation hash:", userOpHash);
 
       if (userOp && userOpHash) {
-        const txHash =
-          (await smartAccount?.sendUserOperation({
-            userOp,
-            userOpHash,
-          })) || null;
+        const txHash = (await smartAccount?.sendUserOperation({ userOp, userOpHash })) || null;
+        console.log("User operation:", userOp);
+        console.log("User operation hash:", userOpHash);
 
         setTransactionHash(txHash);
         console.log("Transaction sent:", txHash);

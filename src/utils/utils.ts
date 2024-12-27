@@ -14,7 +14,7 @@ export const formatBalance = (balanceInEther: string): string => {
 };
 
 /**
- * Function to truncate Ethereum addresses for display purposes.
+ * Function to truncate Ethereum addresses for display purposes. : 0x9215286101acf84aebe1ba7e2a1334b05406879e
  * 
  * @param {string} address - The Ethereum address to truncate.
  * @returns {string} The truncated address in the format `0x1234...abcd`.

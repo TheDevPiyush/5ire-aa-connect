@@ -22,6 +22,7 @@ import {
 import { AAWrapProvider, SendTransactionMode } from "@particle-network/aa"; // Only needed with Eip1193 provider
 import { ethers, type Eip1193Provider } from "ethers";
 import { formatEther, parseEther } from "viem";
+import Link from "next/link";
 
 export default function Home() {
   const { isConnected, chainId, isConnecting, isDisconnected, chain } =
@@ -185,6 +186,7 @@ export default function Home() {
           Status: {connectionStatus}
         </h2>
       </div>
+      <Link className="p-3 bg-blue-400 rounded-xl" href={'/fundraiserPage'}>FundRaiser Page</Link>
       {isConnected ? (
         <>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">

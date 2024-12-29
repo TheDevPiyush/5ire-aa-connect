@@ -186,7 +186,7 @@ export default function Home() {
           Status: {connectionStatus}
         </h2>
       </div>
-      <Link className="p-3 bg-blue-400 rounded-xl" href={'/fundraiserPage'}>FundRaiser Page</Link>
+      <Link className="p-3 bg-amber-600 font-bold animate-pulse rounded-xl" href={'/fundraiserPage'}>Donate Token</Link>
       {isConnected ? (
         <>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">

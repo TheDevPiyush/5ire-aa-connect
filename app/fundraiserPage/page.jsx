@@ -8,12 +8,14 @@ export default function Donate() {
     const [message, setMessage] = useState("");
     const [donors, setDonors] = useState([]);
 
+    const [ERC20_TOKEN_ADDRESS, SET_ERC20_TOKEN_ADDRESS] = useState('0xf102648D6aCa7F979D2cE08783B11dB8EDC9E9cC');
+
     const fetchDonors = async () => {
         try {
             setMessage("Fetching donors...");
             const { signer } = await getProviderAndSigner();
             const fundraiser = await getFundraiserContract(signer);
-            const erc20 = await getErc20Contract(signer);
+            const erc20 = await getErc20Contract(signer, ERC20_TOKEN_ADDRESS);
 
             const donorAddresses = await fundraiser.getDonors();
             const donorDetails = await Promise.all(
@@ -38,7 +40,7 @@ export default function Donate() {
             setMessage("Checking contract balance...");
             const { signer } = await getProviderAndSigner();
             const fundraiser = await getFundraiserContract(signer);
-            const erc20 = await getErc20Contract(signer);
+            const erc20 = await getErc20Contract(signer, ERC20_TOKEN_ADDRESS);
 
             const contractBalance = await erc20.balanceOf("0x279636B044B83B9a6f4949eCFfE849a9cdc5E81f");
             if (contractBalance.toString() === "0") {
@@ -47,13 +49,13 @@ export default function Donate() {
             }
 
             setMessage("Withdrawing funds...");
-            const withdrawTx = await fundraiser.withdraw("0xf102648D6aCa7F979D2cE08783B11dB8EDC9E9cC");
+            const withdrawTx = await fundraiser.withdraw(ERC20_TOKEN_ADDRESS);
             await withdrawTx.wait();
 
             setMessage("Funds withdrawn successfully!");
         } catch (error) {
             console.error(error);
-            setMessage("Only the owner can withdraw.");
+            setMessage("Only the owner can withdraw funds!");
         }
     };
 
@@ -63,7 +65,7 @@ export default function Donate() {
             const { signer } = await getProviderAndSigner();
 
             const fundraiser = await getFundraiserContract(signer);
-            const erc20 = await getErc20Contract(signer);
+            const erc20 = await getErc20Contract(signer, ERC20_TOKEN_ADDRESS);
 
             const donationAmount = ethers.parseUnits(amount, 18);
 
@@ -92,11 +94,27 @@ export default function Donate() {
     return (
         <div className="font-bold font-mono" style={{ padding: "2rem", textAlign: "center" }}>
             <h1 className="text-2xl mb-9">Donate to Fundraiser</h1>
-            <label htmlFor="amount">Please Enter Amount of tokens to donate</label>
+
+            <label htmlFor="token">Please provide the address of your custom ERC20 Token you have in your wallet. (Current PIY) :</label>
+            <br />
+            <input
+                id="token"
+                className="text-white rounded-full bg-gray-600 focus:bg-gray-500 text-lg"
+                type="text"
+                placeholder="Contract Address"
+                value={ERC20_TOKEN_ADDRESS}
+                onChange={(e) => SET_ERC20_TOKEN_ADDRESS(e.target.value)}
+                style={{ padding: "0.5rem", margin: "1rem 0" }}
+            />
+
+            <br />
+            <br />
+
+            <label htmlFor="amount">Please Enter Amount of tokens to donate :</label>
             <br />
             <input
                 id="amount"
-                className="text-black rounded-full bg-gray-100 text-2xl"
+                className="text-white rounded-full bg-gray-600 focus:bg-gray-500 text-lg"
                 type="number"
                 placeholder="Token Amount"
                 value={amount}
@@ -104,6 +122,7 @@ export default function Donate() {
                 style={{ padding: "0.5rem", margin: "1rem 0" }}
             />
             <br />
+
             <div className="flex gap-3 w-full justify-center items-center my-5">
 
                 <button

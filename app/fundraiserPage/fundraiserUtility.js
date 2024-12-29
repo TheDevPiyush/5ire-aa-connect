@@ -2,7 +2,6 @@ import { ethers } from "ethers";
 
 // Contract Addresses
 const FUNDRAISER_CONTRACT = "0x279636B044B83B9a6f4949eCFfE849a9cdc5E81f";
-const ERC20_TOKEN_ADDRESS = "0xf102648D6aCa7F979D2cE08783B11dB8EDC9E9cC";
 
 // ABI for Fundraiser Contract
 const fundraiserAbi = [
@@ -38,7 +37,7 @@ export const getFundraiserContract = async (signer) => {
     return new ethers.Contract(FUNDRAISER_CONTRACT, fundraiserAbi, signer);
 };
 
-export const getErc20Contract = async (signer) => {
+export const getErc20Contract = async (signer, ERC20_TOKEN_ADDRESS) => {
     return new ethers.Contract(ERC20_TOKEN_ADDRESS, erc20Abi, signer);
 };
 

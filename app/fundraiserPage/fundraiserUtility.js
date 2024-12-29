@@ -1,9 +1,7 @@
 import { ethers } from "ethers";
 
-// Contract Addresses
 const FUNDRAISER_CONTRACT = "0x279636B044B83B9a6f4949eCFfE849a9cdc5E81f";
 
-// ABI for Fundraiser Contract
 const fundraiserAbi = [
     "function donate(address token, uint256 amount) external",
     "function getDonors() external view returns (address[])",
@@ -11,7 +9,6 @@ const fundraiserAbi = [
     "function withdraw(address token) external"
 ];
 
-// ABI for ERC20 Token
 const erc20Abi = [
     "function approve(address spender, uint256 amount) external returns (bool)",
     "function balanceOf(address account) external view returns (uint256)",
@@ -24,10 +21,8 @@ export const getProviderAndSigner = async () => {
         throw new Error("MetaMask is not installed!");
     }
 
-    // Request MetaMask connection
     await window.ethereum.request({ method: "eth_requestAccounts" });
 
-    // Create provider and signer
     const provider = new ethers.BrowserProvider(window.ethereum);
     const signer = await provider.getSigner();
     return { provider, signer };

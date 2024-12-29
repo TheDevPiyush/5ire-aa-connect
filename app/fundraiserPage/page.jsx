@@ -3,6 +3,9 @@ import { useState, useEffect } from "react";
 import { ethers } from "ethers";
 import { getProviderAndSigner, getFundraiserContract, getErc20Contract } from "./fundraiserUtility";
 
+
+// make sure to install dependencies and to set .env to minimize initial errors on first run. :)
+
 export default function Donate() {
     const [amount, setAmount] = useState("");
     const [message, setMessage] = useState("");

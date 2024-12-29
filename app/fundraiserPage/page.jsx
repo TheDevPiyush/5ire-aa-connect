@@ -83,7 +83,7 @@ export default function Donate() {
             }, 1500);
         } catch (error) {
             console.error(error);
-            setMessage("An error occurred during the donation process.");
+            setMessage("Donation Failed. Make sure the Address is correct and that you have tokens in your wallet balance");
         }
     };
 
